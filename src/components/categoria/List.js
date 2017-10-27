@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getList } from '../../actions/categoria-action'
+import {
+  Link
+} from 'react-router-dom'
 
 class List extends Component {
     constructor(props) {
@@ -30,6 +33,9 @@ class List extends Component {
         const { list } = this.props
         return (
             <div>
+
+                <Link to="/categorias/new">Categoria New</Link>
+
                 Categoria List
 <label>Nombre:
             <input type="text"

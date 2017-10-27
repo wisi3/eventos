@@ -5,6 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 import CategoriaList from './components/categoria/List'
+import CategoriaForm from './components/categoria/Form'
 
 const RouteWithSubRoutes = (route) => (
   <Route path={route.path} render={props => (
@@ -57,8 +58,8 @@ const routes = [
       { path: '/categorias/list',
         component: CategoriaList
       },
-      { path: '/tacos/cart',
-        component: Cart
+      { path: '/categorias/new',
+        component: CategoriaForm
       }
     ]
   }
