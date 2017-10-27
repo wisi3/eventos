@@ -3,15 +3,35 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  handleClick = e => {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  accion = e => {
+    console.log('e=' + e);
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">
+            XXWelcome to React
+            </h1>
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
+   <a href="#" onClick={this.handleClick}>
+            Click me
+    </a>
+          <br />
+          <button onClick={() => this.accion("gg")}>
+            Accion
+    </button>
+
         </p>
       </div>
     );
