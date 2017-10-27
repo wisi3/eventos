@@ -13,7 +13,7 @@ if (
 ) {
     devtools = window.__REDUX_DEVTOOLS_EXTENSION__();
 }
-let middlewares = [authMiddleware, thunk];
+let middlewares = [ thunk,];
 
 if (
     process.env.NODE_ENV !== 'production'
@@ -29,8 +29,7 @@ if (
 const store = createStore(
     reducers,
     compose(
-        applyMiddleware(...middlewares),
-        devtools
+        thunk
     )
 )
 

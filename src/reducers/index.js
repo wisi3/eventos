@@ -6,3 +6,5 @@ let reducer = combineReducers({
     categoria: categoria,
     
 })
+
+export default reducer               
