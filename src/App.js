@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+let lista=[
+  {
+    codigo:"01",
+    nombre: "Juan"
+  },
+  {
+    codigo:"02",
+    nombre: "Alex"
+  }
+]
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -9,7 +20,7 @@ class App extends Component {
       nombre: ""
     }
   }
-  handleInputChange= event => {
+  handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -19,23 +30,28 @@ class App extends Component {
     });
   }
   accion = e => {
-    console.log('d=' + JSON.stringify(this.state));
+    console.log('e=' + e)
+  }
+  handleSubmit = event => {
+    event.preventDefault()
+    console.log('d=' + JSON.stringify(this.state))
+
   }
   render() {
     return (
       <div className="App">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>Codigo:
-            <input type="text" 
-            value={this.state.codigo}
-            onChange={this.handleInputChange}
-            name="codigo" />
+            <input type="text"
+              value={this.state.codigo}
+              onChange={this.handleInputChange}
+              name="codigo" />
           </label><br />
           <label>Nombre:
-            <input type="text" 
-            value={this.state.nombre}
-            onChange={this.handleInputChange}
-            name="nombre" />
+            <input type="text"
+              value={this.state.nombre}
+              onChange={this.handleInputChange}
+              name="nombre" />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -44,7 +60,7 @@ class App extends Component {
           Accion
     </button><br />
         {this.state.nombre}
-        
+
       </div>
     );
   }
