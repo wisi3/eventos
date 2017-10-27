@@ -28,7 +28,11 @@ class Form extends Component {
     handleSubmit = event => {
         event.preventDefault()
         console.log('d=' + JSON.stringify(this.state))
-        this.props.categoriaSave(this.state)
+        this.props.categoriaSave(this.state, this.props.history).then(r => {
+            r.push('/categorias/list')
+        }, error => {
+            throw (error)
+        })
     }
 
     render() {

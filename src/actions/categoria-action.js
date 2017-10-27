@@ -47,12 +47,17 @@ export const categoriaAdd = () => (
         type: CATEGORIA_ADD,
     }
 )
-export const categoriaSave = (d) => {
+export const categoriaSave = (d, h) => {
     return (dispatch) => {
-        client.post(url, d).then(r => {
-            dispatch(categoriaAdd())
-        }).catch(error => {
-            throw (error)
+        return new Promise((resolve, reject) => {
+            try {
+                client.post(url, d).then(r => {
+                    dispatch(categoriaAdd())
+                    resolve(h)
+                })
+            } catch (err) {
+                reject('Errr')
+            }
         })
     }
 }
