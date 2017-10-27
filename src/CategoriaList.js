@@ -20,6 +20,7 @@ class CategoriaList extends Component {
     }
 }
 CategoriaList.propTypes = {
-    saludo: PropTypes.string.isRequired
+    saludo: PropTypes.string.isRequired,
+    lista: PropTypes.array.isRequired
 }
 export default CategoriaList
