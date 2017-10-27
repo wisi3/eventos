@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 class App extends Component {
-
-  handleClick = e => {
-    e.preventDefault();
-    console.log('The link was clicked.');
+  constructor(props) {
+    super(props)
+    this.state = {
+      codigo: "",
+      nombre: ""
+    }
   }
+  handleInputChange= event => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
 
+    this.setState({
+      [name]: value
+    });
+  }
   accion = e => {
-    console.log('e=' + e);
+    console.log('d=' + JSON.stringify(this.state));
   }
-
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">
-            XXWelcome to React
-            </h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-   <a href="#" onClick={this.handleClick}>
-            Click me
-    </a>
-          <br />
-          <button onClick={() => this.accion("gg")}>
-            Accion
-    </button>
+        <form>
+          <label>Codigo:
+            <input type="text" 
+            value={this.state.codigo}
+            onChange={this.handleInputChange}
+            name="codigo" />
+          </label><br />
+          <label>Nombre:
+            <input type="text" 
+            value={this.state.nombre}
+            onChange={this.handleInputChange}
+            name="nombre" />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
 
-        </p>
+        <button onClick={() => this.accion("gg")}>
+          Accion
+    </button><br />
+        {this.state.nombre}
+        
       </div>
     );
   }
