@@ -2,8 +2,8 @@ import axios from 'axios'
 const client = axios.create({
     baseURL: "https://eventos-serve.herokuapp.com"
 })
-const url= "/api-catalogo/categorias/"
-export const CATEGORIA_LIST="CATEGORIA_LIST"
+const url = "/api-catalogo/categorias/"
+export const CATEGORIA_LIST = "CATEGORIA_LIST"
 export const categoriaList = (list) => (
     {
         type: CATEGORIA_LIST,
@@ -20,7 +20,7 @@ export const getList = (q = '') => {
     return (dispatch) => {
         client.get(url, params).then(r => {
             dispatch(categoriaList(r.data))
-        }).catch(error => { 
+        }).catch(error => {
             throw (error)
             /*
             //console.log('getList catch:' + JSON.stringify(error.response))
@@ -36,6 +36,23 @@ export const getList = (q = '') => {
             }
             //console.log(error.config);
             */
+        })
+    }
+}
+
+
+export const CATEGORIA_ADD = "CATEGORIA_ADD"
+export const categoriaAdd = () => (
+    {
+        type: CATEGORIA_ADD,
+    }
+)
+export const categoriaSave = (d) => {
+    return (dispatch) => {
+        client.post(url, d).then(r => {
+            dispatch(categoriaAdd())
+        }).catch(error => {
+            throw (error)
         })
     }
 }

@@ -1,4 +1,4 @@
-import { CATEGORIA_LIST } from '../actions/categoria-action'
+import { CATEGORIA_LIST, CATEGORIA_ADD } from '../actions/categoria-action'
 
 const initialState = {
     list: []
@@ -12,7 +12,11 @@ const categoriaReducer = (state = initialState, action) => {
                 list: action.list
             }
             break;
-
+        case CATEGORIA_ADD:
+            return {
+                ...state,
+            }
+            break;
         default:
             return state;
     }

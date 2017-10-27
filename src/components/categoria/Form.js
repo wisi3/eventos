@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getList } from '../../actions/categoria-action'
+import { categoriaSave } from '../../actions/categoria-action'
 
 class Form extends Component {
     constructor(props) {
@@ -26,10 +26,10 @@ class Form extends Component {
 
     }
     handleSubmit = event => {
-    event.preventDefault()
-    console.log('d=' + JSON.stringify(this.state))
-
-  }
+        event.preventDefault()
+        console.log('d=' + JSON.stringify(this.state))
+        this.props.categoriaSave(this.state)
+    }
 
     render() {
         console.log(JSON.stringify(this.props))
@@ -63,5 +63,5 @@ const mapStateToProps = (state) => {
     //return { list: state.categoria.list }
 }
 export default connect(mapStateToProps, {
-
+    categoriaSave
 })(Form)
