@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import { getList } from '../../actions/categoria-action'
 
 class List extends Component {
+    componentWillMount() {
+        this.props.getList("");
+    }
     render() {
         console.log(JSON.stringify(this.props))
 
@@ -16,10 +19,12 @@ class List extends Component {
     }
 }
 List.propTypes = {
-    lista: PropTypes.array
+    list: PropTypes.array
 }
 
 const mapStateToProps = (state) => {
     return { list: state.categoria.list }
 }
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps, {
+    getList
+})(List)
