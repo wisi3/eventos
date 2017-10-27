@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-let lista=[
-  {
-    codigo:"01",
-    nombre: "Juan"
-  },
-  {
-    codigo:"02",
-    nombre: "Alex"
-  }
-]
+const lista = [
+      {
+        codigo: "01",
+        nombre: "Juan"
+      },
+      {
+        codigo: "02",
+        nombre: "Alex"
+      }
+    ]
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class App extends Component {
 
   }
   render() {
+    
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit}>
@@ -60,7 +61,12 @@ class App extends Component {
           Accion
     </button><br />
         {this.state.nombre}
+        <ul>
+          {lista.map((d, i) => (
+            <li key={i}>{i+1}: {d.codigo} - {d.nombre}</li>
 
+          ))}
+        </ul>
       </div>
     );
   }
