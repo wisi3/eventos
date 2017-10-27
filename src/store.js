@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose} from 'redux'
-import { thunk } from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 import reducers from './reducers'
 
 
@@ -13,7 +13,7 @@ if (
 ) {
     devtools = window.__REDUX_DEVTOOLS_EXTENSION__();
 }
-let middlewares = [ thunk,];
+let middlewares = [thunk,];
 
 if (
     process.env.NODE_ENV !== 'production'
@@ -29,7 +29,8 @@ if (
 const store = createStore(
     reducers,
     compose(
-        thunk
+        applyMiddleware(...middlewares),
+        devtools
     )
 )
 
