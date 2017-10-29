@@ -1,9 +1,15 @@
-import { CATEGORIA_LIST, CATEGORIA_ADD, CATEGORIA_UPDATE, CATEGORIA_DELETE } from '../actions/categoria-action'
+import {
+    CATEGORIA_LIST,
+    CATEGORIA_LIST_FAILURE,
+    CATEGORIA_ADD, CATEGORIA_UPDATE,
+    CATEGORIA_DELETE
+} from '../actions/categoria-action'
 //import { CATEGORIA_FETCH,  } from '../actions/categoria-action'
 
 const initialState = {
     list: [],
-    data: {}
+    data: {},
+    error: null
 }
 
 const categoriaReducer = (state = initialState, action) => {
@@ -11,8 +17,14 @@ const categoriaReducer = (state = initialState, action) => {
         case CATEGORIA_LIST:
             return {
                 ...state,
-                list: action.list
+                list: action.list,
+                error: null
             }
+        case CATEGORIA_LIST_FAILURE: return {
+            ...state,
+            list: [],
+            error: action.error,
+        }
         case CATEGORIA_ADD:
             return {
                 ...state,
