@@ -1,7 +1,9 @@
-import { CATEGORIA_LIST, CATEGORIA_ADD } from '../actions/categoria-action'
+import { CATEGORIA_LIST, CATEGORIA_ADD, CATEGORIA_UPDATE, CATEGORIA_DELETE } from '../actions/categoria-action'
+//import { CATEGORIA_FETCH,  } from '../actions/categoria-action'
 
 const initialState = {
-    list: []
+    list: [],
+    data: {}
 }
 
 const categoriaReducer = (state = initialState, action) => {
@@ -11,12 +13,26 @@ const categoriaReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list
             }
-            break;
         case CATEGORIA_ADD:
             return {
                 ...state,
             }
-            break;
+        /*
+    case CATEGORIA_FETCH:
+        return {
+            ...state,
+            data: action.data
+        }*/
+        case CATEGORIA_UPDATE:
+            return {
+                ...state,
+            }
+        case CATEGORIA_DELETE:
+            const id = action.data
+            return {
+                ...state,
+                list: state.list.filter(item => item.id !== id)
+            }
         default:
             return state;
     }

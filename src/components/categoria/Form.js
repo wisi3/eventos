@@ -1,18 +1,29 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { categoriaSave } from '../../actions/categoria-action'
+import { save, getById, update } from '../../actions/categoria-action'
 
 class Form extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            codigo: "",
-            nombre: ""
+            id: props.data ? props.data.id : null,
+            codigo: props.data ? props.data.codigo : '',
+            nombre: props.data ? props.data.nombre : ''
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        const { id } = this.props.match.params
+        if (id) {
+            this.props.getById(id).then(data => {
+                this.setState({
+                    id: data.id,
+                    codigo: data.codigo,
+                    nombre: data.nombre
+                });
+            });
+        }
 
     }
     handleInputChange = event => {
@@ -28,15 +39,25 @@ class Form extends Component {
     handleSubmit = event => {
         event.preventDefault()
         console.log('d=' + JSON.stringify(this.state))
-        this.props.categoriaSave(this.state, this.props.history).then(r => {
-            r.push('/categorias/list')
-        }, error => {
-            throw (error)
-        })
+
+        const { id } = this.props.match.params
+        if (id) {
+            this.props.update(this.state, this.props.history).then(r => {
+                r.push('/categorias/list')
+            }, error => {
+                throw (error)
+            })
+        } else {
+            this.props.save(this.state, this.props.history).then(r => {
+                r.push('/categorias/list')
+            }, error => {
+                throw (error)
+            })
+        }
     }
 
     render() {
-        console.log(JSON.stringify(this.props))
+        //console.log(JSON.stringify(this.props))
         //const { list } = this.props
         return (
             <div>
@@ -61,11 +82,22 @@ class Form extends Component {
     }
 }
 Form.propTypes = {
-    // list: PropTypes.array
+    data: PropTypes.object
 }
-const mapStateToProps = (state) => {
-    //return { list: state.categoria.list }
+
+const mapStateToProps = (state, props) => {
+    if (props.match.params.id) {
+        return {
+            data: state.categoria.list.find(item => item.id + '' === props.match.params.id + '')
+        }
+    }
+    return {
+        data: null
+    }
+
 }
 export default connect(mapStateToProps, {
-    categoriaSave
+    save,
+    getById,
+    update
 })(Form)

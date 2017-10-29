@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
      Route,
-  Link
 } from 'react-router-dom'
 import CategoriaList from './components/categoria/List'
 import CategoriaForm from './components/categoria/Form'
@@ -59,6 +58,9 @@ const routes = [
         component: CategoriaList
       },
       { path: '/categorias/new',
+        component: CategoriaForm
+      },
+      { path: '/categorias/edit/:id',
         component: CategoriaForm
       }
     ]

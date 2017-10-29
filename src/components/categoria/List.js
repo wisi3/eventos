@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getList } from '../../actions/categoria-action'
+import { getList, del } from '../../actions/categoria-action'
 import {
-  Link
+    Link
 } from 'react-router-dom'
 
 class List extends Component {
@@ -29,27 +29,36 @@ class List extends Component {
     }
 
     render() {
-        console.log(JSON.stringify(this.props))
-        const { list } = this.props
+        //console.log(JSON.stringify(this.props))
+        let { list, del } = this.props
+        if (list === null) {
+            list = []
+        }
         return (
             <div>
-
-                <Link to="/categorias/new">Categoria New</Link>
-
-                Categoria List
-<label>Nombre:
+                <h2>Categoria List</h2>
+                <label>Buscar:
             <input type="text"
                         value={this.state.q}
                         onChange={this.handleInputChange}
                         name="q" />
                 </label>
-
-
-                <ul>
-                    {list.map((d, i) => (
-                        <li key={i}>{i + 1}: {d.codigo} - {d.nombre}</li>
-                    ))}
-                </ul>
+                <Link to="/categorias/new">New Categoria</Link>
+                <table>
+                    <tbody>
+                        {list.map((d, i) => (
+                            <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td> {d.codigo} - {d.nombre}</td>
+                                <td><Link to={`/categorias/edit/${d.id}`}>Edit</Link>
+                                </td>
+                                <td>
+                                    <button onClick={() => del(d.id)} > X </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         )
     }
@@ -61,5 +70,6 @@ const mapStateToProps = (state) => {
     return { list: state.categoria.list }
 }
 export default connect(mapStateToProps, {
-    getList
+    getList,
+    del
 })(List)
