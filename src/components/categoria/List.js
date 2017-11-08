@@ -6,6 +6,7 @@ import {
     Link
 } from 'react-router-dom'
 
+
 class List extends Component {
     constructor(props) {
         super(props)
@@ -29,7 +30,7 @@ class List extends Component {
     }
 
     render() {
-        //console.log(JSON.stringify(this.props))
+        
         let { list, del } = this.props
         if (list === null) {
             list = []
@@ -43,14 +44,14 @@ class List extends Component {
                         onChange={this.handleInputChange}
                         name="q" />
                 </label>
-                <Link to="/categorias/new">New Categoria</Link>
+                <Link to="/catalogo/categorias/new">New Categoria</Link>
                 <table>
                     <tbody>
                         {list.map((d, i) => (
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td> {d.codigo} - {d.nombre}</td>
-                                <td><Link to={`/categorias/edit/${d.id}`}>Edit</Link>
+                                <td><Link to={`/catalogo/categorias/edit/${d.id}`}>Edit</Link>
                                 </td>
                                 <td>
                                     <button onClick={() => del(d.id)} > X </button>

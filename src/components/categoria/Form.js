@@ -10,7 +10,12 @@ class Form extends Component {
             id: props.data ? props.data.id : null,
             codigo: props.data ? props.data.codigo : '',
             nombre: props.data ? props.data.nombre : ''
-        }
+        }/*
+        this.state = {
+            id:  null,
+            codigo:'',
+            nombre: ''
+        }*/
     }
 
     componentDidMount() {
@@ -43,13 +48,13 @@ class Form extends Component {
         const { id } = this.props.match.params
         if (id) {
             this.props.update(this.state, this.props.history).then(r => {
-                r.push('/categorias/list')
+                r.push('/catalogo/categorias/list')
             }, error => {
                 throw (error)
             })
         } else {
             this.props.save(this.state, this.props.history).then(r => {
-                r.push('/categorias/list')
+                r.push('/catalogo/categorias/list')
             }, error => {
                 throw (error)
             })
